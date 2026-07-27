@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "cards": [
+    {
+      "id": "north-road-main",
+      "game": "North Road",
+      "updated": "2026-07-26",
+      "location": "Old observatory",
+      "goals": ["Repair the eastern relay"],
+      "controls": ["Hold left bumper to open the tool wheel"],
+      "story_context": ["The northern signal was deliberately disabled"],
+      "loose_ends": ["Return the survey notes to Mira"],
+      "next_step": "Follow the cable down the east stairwell",
+      "spoiler_boundary": "Observatory arrival",
+      "private_note": "Try the quieter route first"
+    }
+  ]
+}
