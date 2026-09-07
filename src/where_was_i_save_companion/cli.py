@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 from .core import build_report, load_cards, render_markdown
+from .editor import render_html
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -13,16 +14,21 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("input", type=Path)
     parser.add_argument("--game")
     parser.add_argument("--include-private", action="store_true")
-    parser.add_argument("--format", choices=("markdown", "json"), default="markdown")
+    parser.add_argument("--format", choices=("markdown", "json", "html"), default="markdown")
+    parser.add_argument("--share-safe", action="store_true")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     try:
-        report = build_report(load_cards(args.input), args.game, args.include_private)
+        report = build_report(
+            load_cards(args.input), args.game, args.include_private, args.share_safe
+        )
         rendered = (
             json.dumps(report, indent=2, ensure_ascii=False) + "\n"
             if args.format == "json"
             else render_markdown(report)
         )
+        if args.format == "html":
+            rendered = render_html(report)
         if args.output:
             if args.output.exists():
                 raise ValueError(f"output already exists: {args.output}")
