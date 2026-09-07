@@ -1,4 +1,7 @@
 import json
+import re
+import shutil
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -6,6 +9,18 @@ import pytest
 from where_was_i_save_companion.cli import main
 from where_was_i_save_companion.core import build_report, load_cards, render_markdown
 from where_was_i_save_companion.editor import render_html
+
+
+def test_generated_editor_javascript_parses(tmp_path: Path) -> None:
+    node = shutil.which("node")
+    if node is None:
+        pytest.skip("JavaScript syntax acceptance requires Node.js")
+    script = re.search(r"<script>(.*?)</script>", render_html(build_report(sample())), re.S)
+    assert script is not None
+    path = tmp_path / "editor.js"
+    path.write_text(script.group(1), encoding="utf-8")
+    result = subprocess.run([node, "--check", str(path)], capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
 
 
 def sample() -> dict:

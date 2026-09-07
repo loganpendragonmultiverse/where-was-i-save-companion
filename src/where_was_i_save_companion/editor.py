@@ -14,8 +14,8 @@ def render_html(report: dict[str, Any]) -> str:
 <h1>Return to game</h1><p>Review and edit your local cards, then download a new file. Screenshot references are labels only: no image or save files are opened.</p><p id="privacy" role="status"></p><main id="cards"></main><button id="download">Download edited cards</button><button id="print">Print cards</button>
 <script type="application/json" id="data">"""
         + payload
-        + """</script><script>
-const data=JSON.parse(document.getElementById('data').textContent);document.getElementById('privacy').textContent=JSON.stringify(data.share_review??{mode:'local',note:'Review all fields before sharing'});
+        + r"""</script><script>
+const data=JSON.parse(document.getElementById('data').textContent);const omitted=data.share_review?.omitted??{};document.getElementById('privacy').textContent=(data.share_review?.share_safe?'Share-safe export. ':'Local card export. ')+`Omitted ${omitted.private_notes??0} private notes and ${omitted.screenshot_references??0} screenshot references. Review retained text before sharing.`;
 for(const card of data.cards){const article=document.createElement('article');const title=document.createElement('h2');title.textContent=card.game;article.append(title);
 const fields=['id','game','updated','location','next_step','last_played','goals','controls','story_context','loose_ends','spoiler_boundary','save_catalog_id'];
 if(!data.share_review?.share_safe)fields.push('screenshot_reference');if('private_note' in card)fields.push('private_note');
