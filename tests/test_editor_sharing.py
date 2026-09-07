@@ -15,11 +15,13 @@ def test_generated_editor_javascript_parses(tmp_path: Path) -> None:
     node = shutil.which("node")
     if node is None:
         pytest.skip("JavaScript syntax acceptance requires Node.js")
-    script = re.search(r"<script>(.*?)</script>", render_html(build_report(sample())), re.S)
+    script = re.search(r"<script>(.*?)</script>", render_html(build_report(sample())), re.DOTALL)
     assert script is not None
     path = tmp_path / "editor.js"
     path.write_text(script.group(1), encoding="utf-8")
-    result = subprocess.run([node, "--check", str(path)], capture_output=True, text=True)
+    result = subprocess.run(
+        [node, "--check", str(path)], capture_output=True, text=True, check=False
+    )
     assert result.returncode == 0, result.stderr
 
 
