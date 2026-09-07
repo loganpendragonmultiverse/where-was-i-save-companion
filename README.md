@@ -17,3 +17,13 @@ Cards can carry a spoiler boundary and a private note. Markdown reports omit pri
 The tool does not inspect game saves, synchronize accounts, infer story state, or verify that a note remains accurate. The JSON file is the source of truth and may contain spoilers or personal notes, so store and share it accordingly. Requires Python 3.10 or newer.
 
 Part of the [Logan Pendragon Forge open-source collection](https://www.loganpendragonforge.com/open-source/). Licensed under the [MIT License](LICENSE).
+
+## Version 1.1.0: reviewed improvements
+
+Add editable printable return-to-game cards, last-played and screenshot references, and explicit share-safe exports with omission previews.
+
+```bash
+where-was-i examples/cards.json --format html --output return-cards.html
+```
+
+HTML edits card fields and downloads a new version 1 input; print layout includes full field values. last_played is an ISO date, screenshot_reference is a text attachment reference, and save_catalog_id optionally points to an operator-chosen catalog record. Neither images nor saves are opened. --share-safe works with Markdown, JSON and HTML: it omits private notes, screenshot references and unsupported extension fields, reporting counts without copying omitted values. Retained location, goals and story text still need review before sharing. --include-private is incompatible with --share-safe. Default reports continue to omit private_note. Source files and existing outputs remain unchanged.
