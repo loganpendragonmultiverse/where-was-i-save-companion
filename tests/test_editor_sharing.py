@@ -1,7 +1,7 @@
 import json
-import re
 import shutil
 import subprocess
+from html.parser import HTMLParser
 from pathlib import Path
 
 import pytest
@@ -15,10 +15,32 @@ def test_generated_editor_javascript_parses(tmp_path: Path) -> None:
     node = shutil.which("node")
     if node is None:
         pytest.skip("JavaScript syntax acceptance requires Node.js")
-    script = re.search(r"<script>(.*?)</script>", render_html(build_report(sample())), re.DOTALL)
-    assert script is not None
+
+    class ScriptReader(HTMLParser):
+        def __init__(self) -> None:
+            super().__init__()
+            self.in_script = False
+            self.parts: list[str] = []
+
+        def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+            self.in_script = tag == "script" and dict(attrs).get("type", "text/javascript") in {
+                "text/javascript",
+                "module",
+            }
+
+        def handle_endtag(self, tag: str) -> None:
+            if tag == "script":
+                self.in_script = False
+
+        def handle_data(self, data: str) -> None:
+            if self.in_script:
+                self.parts.append(data)
+
+    parser = ScriptReader()
+    parser.feed(render_html(build_report(sample())))
+    assert parser.parts
     path = tmp_path / "editor.js"
-    path.write_text(script.group(1), encoding="utf-8")
+    path.write_text("\n".join(parser.parts), encoding="utf-8")
     result = subprocess.run(
         [node, "--check", str(path)], capture_output=True, text=True, check=False
     )
