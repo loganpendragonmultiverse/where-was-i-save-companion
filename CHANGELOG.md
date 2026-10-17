@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0 - 2026-10-17
+
+- Show added, removed and changed cards by stable ID with unchanged IDs
+- Apply private-note omission and share-safe filtering before generating any diff evidence
+- Keep comparison reports local, deterministic and HTML-escaped
+
 ## 1.1.0 - 2026-09-07
 
 - Add editable printable return-to-game cards, last-played and screenshot references, and explicit share-safe exports with omission previews.

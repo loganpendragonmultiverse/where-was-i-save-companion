@@ -1,5 +1,11 @@
 # Where Was I? Save Companion
 
+## Current release 1.2.0
+
+Compare return-card snapshots after applying the selected privacy rules to both inputs.
+
+Use `where-was-i current.json --compare previous.json --share-safe --format html --output comparison.html`. Both files must be version 1 card inputs. Comparison covers full files and cannot be combined with --game. Default comparisons omit private notes; --share-safe additionally removes screenshot references and unsupported fields from both sides, including removed and added cards. --include-private is explicit and incompatible with --share-safe. Retained goals, location and story text still need review. Changing an ID appears as removal/addition; neither input is modified.
+
 [![CI](https://github.com/loganpendragonmultiverse/where-was-i-save-companion/actions/workflows/ci.yml/badge.svg)](https://github.com/loganpendragonmultiverse/where-was-i-save-companion/actions/workflows/ci.yml)
 
 Where Was I? Save Companion turns a small local JSON file into private return-to-game cards. Each card keeps the practical context that save files usually omit: current location, immediate goals, controls worth remembering, story context, loose ends, and the next action.
