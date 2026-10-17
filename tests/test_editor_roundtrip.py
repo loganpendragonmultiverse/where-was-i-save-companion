@@ -49,13 +49,13 @@ class Element {
   replaceChildren(){this.children=[];}
   click(){this.events.click?.();}
 }
-const ids=Object.fromEntries(['data','privacy','cards','download','print','add'].map(id=>[id,new Element(id)]));
+const ids=Object.fromEntries(['data','privacy','cards','download','print','add','saved'].map(id=>[id,new Element(id)]));
 ids.data.textContent=payload;
-let blob,downloads=0;
+let blob,downloads=0;const windowEvents={};
 vm.runInNewContext(js,{
   document:{getElementById:id=>ids[id],createElement:tag=>new Element(tag),querySelector:()=>null},
   Blob:require('buffer').Blob,URL:{createObjectURL:value=>{blob=value;downloads++;return 'blob:test';},
-    revokeObjectURL:()=>{}},setTimeout:()=>{},window:{print:()=>{},addEventListener:()=>{}}
+    revokeObjectURL:()=>{}},setTimeout:()=>{},window:{print:()=>{},addEventListener:(name,callback)=>{windowEvents[name]=callback;}}
 });
 const inputs=nodes.filter(node=>node.tag==='input'&&node.parent?.textContent==='id');
 const edit=value=>{inputs[1].value=value;inputs[1].events.input();};
@@ -67,6 +67,18 @@ assert.equal(downloads,0,'blank IDs must still block download');
 assert.match(ids.privacy.textContent,/Required card fields/);
 edit('corrected');ids.download.click();
 assert.equal(downloads,1,'corrected unique ID should download');
+let prevented=false;windowEvents.beforeunload({preventDefault:()=>{prevented=true;}});
+assert.equal(prevented,true,'download initiation must keep unsaved warning');
+assert.equal(ids.saved.disabled,false);
+edit('newer');assert.equal(ids.saved.disabled,true,'editing invalidates the pending export');
+ids.saved.events.click();prevented=false;windowEvents.beforeunload({preventDefault:()=>{prevented=true;}});
+assert.equal(prevented,true,'stale export acknowledgement cannot clear warning');
+edit('corrected');ids.download.click();assert.equal(ids.saved.disabled,false);ids.saved.click();
+prevented=false;windowEvents.beforeunload({preventDefault:()=>{prevented=true;}});
+assert.equal(prevented,false,'explicit saved acknowledgement clears warning');
+edit('newer');assert.equal(ids.saved.disabled,true,'later edits invalidate acknowledgement');
+prevented=false;windowEvents.beforeunload({preventDefault:()=>{prevented=true;}});
+assert.equal(prevented,true,'later edits rearm warning');
 blob.text().then(text=>fs.writeFileSync(process.argv[3],text)).catch(error=>{throw error;});
 """,
         encoding="utf-8",

@@ -4,7 +4,7 @@
 
 - Create, duplicate and remove cards in the local editor, including an empty collection, with unique IDs and required-field guards.
 - Update screen/print headings during game edits and preserve actual line-separated list fields.
-- Warn before leaving unsaved edits without storing notes in the browser; downloading saves a new file and printing keeps the warning active.
+- Warn before leaving unsaved edits without storing notes in the browser; starting a download keeps the warning active until the operator explicitly acknowledges saving that current export. Printing keeps the warning active.
 - Preserve privacy modes during card authoring and hide stale comparison evidence after edits.
 
 ## 1.2.2 - 2026-10-17

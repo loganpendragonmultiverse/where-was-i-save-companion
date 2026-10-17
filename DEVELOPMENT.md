@@ -38,7 +38,7 @@ Change the second card ID to match the first: download must be blocked with a us
 
 - Create, duplicate and remove cards in the local editor, including an empty collection, with unique IDs and required-field guards.
 - Update screen/print headings during game edits and preserve actual line-separated list fields.
-- Warn before leaving unsaved edits without storing notes in the browser; downloading saves a new file and printing keeps the warning active.
+- Warn before leaving unsaved edits without storing notes in the browser; starting a download keeps the warning active until the operator explicitly acknowledges saving that current export. Printing keeps the warning active.
 - Preserve privacy modes during card authoring and hide stale comparison evidence after edits.
 
 Run the complete source gates and installed built-wheel tests. Run `tests/browser_fixtures.py` with the installed package and a fresh private output directory, then `tests/browser_acceptance.mjs` in Chromium, Firefox and WebKit. These fixtures are synthetic. Protected CI and independent exact-head review remain required before release.
