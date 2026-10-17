@@ -9,11 +9,19 @@
 ## What you can do
 
 - Keep local cards with progress, reminders and return-to-game notes.
-- Edit cards in the browser and save them as a new file.
+- Create, duplicate, edit or remove cards in the browser and save them as a new file.
 - Compare saved cards after applying the chosen privacy settings.
 
 
-## Current release 1.2.2
+## Current release 1.3.0
+
+Create a first card from an empty file (`{"version": 1, "cards": []}`), add another card, duplicate one with a generated unique ID, or remove one after confirmation. The browser updates game headings and printable values together. List fields use one item per actual line.
+
+Edits stay only in the current tab until you download the new JSON file. Closing or reloading a changed editor prompts before leaving; printing does not save changes or clear the warning. No browser storage or network sync is added. Starting a download keeps the warning active because saving can be canceled. After saving the current JSON file, choose **I saved the download** to clear the warning. Editing, adding, duplicating or removing a card disables that acknowledgment until you export the current state again. IDs must be unique and required fields nonblank before download or the Print cards action. You can remove all cards and download a valid empty collection.
+
+New and duplicated cards respect the HTML's selected privacy mode: default omits private notes, `--share-safe` also excludes screenshot references and unknown fields, and `--include-private` explicitly enables private notes. Retained text can still be sensitive. After editing a comparison page, its original comparison is hidden; download the new cards and regenerate the comparison with the CLI. Sources and existing outputs remain unchanged.
+
+## Duplicate-ID protection in 1.2.2
 
 The browser editor blocks duplicate card IDs before download and explains how to correct them. Required fields must remain nonblank. After correcting an ID, download the edited cards and reopen them with the CLI.
 
