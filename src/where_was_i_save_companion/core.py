@@ -79,6 +79,7 @@ def build_report(
         "cards": cards,
         "share_review": {
             "share_safe": share_safe,
+            "include_private": include_private,
             "omitted": omitted,
             "note": "Review retained story, controls, goals and location text before sharing; no automatic anonymity guarantee",
         },

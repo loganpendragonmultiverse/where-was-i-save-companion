@@ -46,15 +46,16 @@ class Element {
   constructor(tag){this.tag=tag;this.events={};this.children=[];nodes.push(this);}
   append(...children){for(const child of children){child.parent=this;this.children.push(child);}}
   addEventListener(event,callback){this.events[event]=callback;}
+  replaceChildren(){this.children=[];}
   click(){this.events.click?.();}
 }
-const ids=Object.fromEntries(['data','privacy','cards','download','print'].map(id=>[id,new Element(id)]));
+const ids=Object.fromEntries(['data','privacy','cards','download','print','add'].map(id=>[id,new Element(id)]));
 ids.data.textContent=payload;
 let blob,downloads=0;
 vm.runInNewContext(js,{
-  document:{getElementById:id=>ids[id],createElement:tag=>new Element(tag)},
+  document:{getElementById:id=>ids[id],createElement:tag=>new Element(tag),querySelector:()=>null},
   Blob:require('buffer').Blob,URL:{createObjectURL:value=>{blob=value;downloads++;return 'blob:test';},
-    revokeObjectURL:()=>{}},setTimeout:()=>{},window:{print:()=>{}}
+    revokeObjectURL:()=>{}},setTimeout:()=>{},window:{print:()=>{},addEventListener:()=>{}}
 });
 const inputs=nodes.filter(node=>node.tag==='input'&&node.parent?.textContent==='id');
 const edit=value=>{inputs[1].value=value;inputs[1].events.input();};

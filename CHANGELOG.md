@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0
+
+- Create, duplicate and remove cards in the local editor, including an empty collection, with unique IDs and required-field guards.
+- Update screen/print headings during game edits and preserve actual line-separated list fields.
+- Warn before leaving unsaved edits without storing notes in the browser; downloading saves a new file and printing keeps the warning active.
+- Preserve privacy modes during card authoring and hide stale comparison evidence after edits.
+
 ## 1.2.2 - 2026-10-17
 
 - Block edited-card downloads with duplicate IDs and show how to correct them.

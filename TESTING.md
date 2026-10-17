@@ -21,3 +21,21 @@ Verify Distinguish JSON booleans from numbers recursively in objects and arrays;
 ## 1.2.2 editor acceptance
 
 Change the second card ID to match the first: download must be blocked with a useful message. Blank required fields must still block download. Correct the ID, download the edited JSON, and reimport it through the CLI. IDs use the same exact-text uniqueness rule as the CLI; valid unique ID edits remain supported.
+
+## 1.3.0 acceptance
+
+- Create, duplicate and remove cards in the local editor, including an empty collection, with unique IDs and required-field guards.
+- Update screen/print headings during game edits and preserve actual line-separated list fields.
+- Warn before leaving unsaved edits without storing notes in the browser; downloading saves a new file and printing keeps the warning active.
+- Preserve privacy modes during card authoring and hide stale comparison evidence after edits.
+
+Run the complete source gates and installed built-wheel tests. Run `tests/browser_fixtures.py` with the installed package and a fresh private output directory, then `tests/browser_acceptance.mjs` in Chromium, Firefox and WebKit. These fixtures are synthetic. Protected CI and independent exact-head review remain required before release.
+
+With Playwright and its three browser engines available, use:
+
+```bash
+python tests/browser_fixtures.py /tmp/fresh-browser-fixtures
+FIXTURE_DIR=/tmp/fresh-browser-fixtures node tests/browser_acceptance.mjs
+```
+
+For an external Playwright installation, set `PLAYWRIGHT_MODULE` to its absolute `index.mjs` path. Browser JSON receipts and downloaded test artifacts stay in the fixture directory. Use a new directory for another run so output protection remains exercised. Reimport the downloaded JSON through `where-was-i` and verify privacy omission and card IDs.
