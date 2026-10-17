@@ -11,3 +11,9 @@ Run the complete existing suite plus the new regression fixtures. Confirm the do
 Compare return-card snapshots after applying the selected privacy rules to both inputs.
 
 Verify Show added, removed and changed cards by stable ID with unchanged IDs; Apply private-note omission and share-safe filtering before generating any diff evidence; Keep comparison reports local, deterministic and HTML-escaped. Run the full existing quality and build gates; release only through protected PR checks and verified tag artifacts.
+
+## 1.2.1 acceptance
+
+Report boolean-to-number changes accurately in JSON comparison evidence.
+
+Verify Distinguish JSON booleans from numbers recursively in objects and arrays; Retain numeric equality for 1 and 1.0, object key-order independence and list order; Add regressions against the public comparison entry point. Run the full existing quality and build gates; release only through protected PR checks and verified tag artifacts.
