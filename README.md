@@ -15,6 +15,10 @@
 
 ## Current release 1.2.2
 
+The browser editor blocks duplicate card IDs before download and explains how to correct them. Required fields must remain nonblank. After correcting an ID, download the edited cards and reopen them with the CLI.
+
+## Updates in 1.2.1
+
 Comparisons now tell the difference between booleans and numbers, even inside nested values.
 
 JSON true differs from 1 and false differs from 0, including inside nested metadata. Numeric 1 and 1.0 compare equally; object key order does not matter, while array order does. Existing field-presence and privacy rules still apply.
