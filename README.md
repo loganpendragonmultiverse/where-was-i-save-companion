@@ -13,13 +13,13 @@
 - Compare saved cards after applying the chosen privacy settings.
 
 
-## Current release 1.2.1
+## Current release 1.2.2
 
 Comparisons now tell the difference between booleans and numbers, even inside nested values.
 
 JSON true differs from 1 and false differs from 0, including inside nested metadata. Numeric 1 and 1.0 compare equally; object key order does not matter, while array order does. Existing field-presence and privacy rules still apply.
 
-## Current release 1.2.0
+## Updates in 1.2.0
 
 Compare two saved sets of game cards using the same privacy settings for both.
 
@@ -52,3 +52,5 @@ where-was-i examples/cards.json --format html --output return-cards.html
 ```
 
 HTML edits card fields and downloads a new version 1 input; print layout includes full field values. last_played is an ISO date, screenshot_reference is a text attachment reference, and save_catalog_id optionally points to an operator-chosen catalog record. Neither images nor saves are opened. --share-safe works with Markdown, JSON and HTML: it omits private notes, screenshot references and unsupported extension fields, reporting counts without copying omitted values. Retained location, goals and story text still need review before sharing. --include-private is incompatible with --share-safe. Default reports continue to omit private_note. Source files and existing outputs remain unchanged.
+
+The local card editor requires unique card IDs before download. If an edit duplicates another card ID, correct it and download again; required fields must also remain nonblank.

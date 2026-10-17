@@ -17,3 +17,7 @@ Verify Show added, removed and changed cards by stable ID with unchanged IDs; Ap
 Report boolean-to-number changes accurately in JSON comparison evidence.
 
 Verify Distinguish JSON booleans from numbers recursively in objects and arrays; Retain numeric equality for 1 and 1.0, object key-order independence and list order; Add regressions against the public comparison entry point. Run the full existing quality and build gates; release only through protected PR checks and verified tag artifacts.
+
+## 1.2.2 editor acceptance
+
+Change the second card ID to match the first: download must be blocked with a useful message. Blank required fields must still block download. Correct the ID, download the edited JSON, and reimport it through the CLI. IDs use the same exact-text uniqueness rule as the CLI; valid unique ID edits remain supported.

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2 - 2026-10-17
+
+- Block edited-card downloads with duplicate IDs and show how to correct them.
+- Exercise editor input and download events, then reimport the corrected export.
+
 ## 1.2.1 - 2026-10-17
 
 - Distinguish JSON booleans from numbers recursively in objects and arrays

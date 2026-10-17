@@ -29,3 +29,7 @@ Save notes about where you left off in a game, and make a copy with private deta
 Logan considers this project complete. Continue fixes and maintenance, and consider good new ideas. The catalog records the reviewed release.
 
 Definition: https://www.loganpendragonforge.com/open-source/?gold=1
+
+## 1.2.2 editor acceptance
+
+Change the second card ID to match the first: download must be blocked with a useful message. Blank required fields must still block download. Correct the ID, download the edited JSON, and reimport it through the CLI. IDs use the same exact-text uniqueness rule as the CLI; valid unique ID edits remain supported.
