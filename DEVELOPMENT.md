@@ -15,3 +15,9 @@ Local formatting, lint, strict types and regression tests pass. Public release c
 Compare return-card snapshots after applying the selected privacy rules to both inputs.
 
 Use `where-was-i current.json --compare previous.json --share-safe --format html --output comparison.html`. Both files must be version 1 card inputs. Comparison covers full files and cannot be combined with --game. Default comparisons omit private notes; --share-safe additionally removes screenshot references and unsupported fields from both sides, including removed and added cards. --include-private is explicit and incompatible with --share-safe. Retained goals, location and story text still need review. Changing an ID appears as removal/addition; neither input is modified.
+
+## 1.2.1 acceptance
+
+Report boolean-to-number changes accurately in JSON comparison evidence.
+
+JSON true differs from 1 and false differs from 0, including inside nested metadata. Numeric 1 and 1.0 compare equally; object key order does not matter, while array order does. Existing field-presence and privacy rules still apply.

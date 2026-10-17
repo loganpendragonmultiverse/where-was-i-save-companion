@@ -1,5 +1,11 @@
 # Where Was I? Save Companion
 
+## Current release 1.2.1
+
+Report boolean-to-number changes accurately in JSON comparison evidence.
+
+JSON true differs from 1 and false differs from 0, including inside nested metadata. Numeric 1 and 1.0 compare equally; object key order does not matter, while array order does. Existing field-presence and privacy rules still apply.
+
 ## Current release 1.2.0
 
 Compare return-card snapshots after applying the selected privacy rules to both inputs.
