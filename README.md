@@ -1,20 +1,27 @@
 # Where Was I? Save Companion
 
-> ⭐ **Gold Star Project — finished for its intended scope.**
-> Scope reviewed for **v1.2.1** on **2026-10-17**. Actively maintained; meaningful future development can reopen the scope.
-> [What Gold Star means](https://www.loganpendragonforge.com/open-source/gold-star/)
+> ⭐ **Gold Star Project**
+> I consider this project complete. Fixes, maintenance and good new ideas are still welcome.
+> [About Gold Stars](https://www.loganpendragonforge.com/open-source/?gold=1)
 >
-> Private return-to-game cards, share-safe exports and privacy-first saved-card comparison.
+> Save notes about where you left off in a game, and make a copy with private details removed when you want to share it.
+
+## What you can do
+
+- Keep local cards with progress, reminders and return-to-game notes.
+- Edit cards in the browser and save them as a new file.
+- Compare saved cards after applying the chosen privacy settings.
+
 
 ## Current release 1.2.1
 
-Report boolean-to-number changes accurately in JSON comparison evidence.
+Comparisons now tell the difference between booleans and numbers, even inside nested values.
 
 JSON true differs from 1 and false differs from 0, including inside nested metadata. Numeric 1 and 1.0 compare equally; object key order does not matter, while array order does. Existing field-presence and privacy rules still apply.
 
 ## Current release 1.2.0
 
-Compare return-card snapshots after applying the selected privacy rules to both inputs.
+Compare two saved sets of game cards using the same privacy settings for both.
 
 Use `where-was-i current.json --compare previous.json --share-safe --format html --output comparison.html`. Both files must be version 1 card inputs. Comparison covers full files and cannot be combined with --game. Default comparisons omit private notes; --share-safe additionally removes screenshot references and unsupported fields from both sides, including removed and added cards. --include-private is explicit and incompatible with --share-safe. Retained goals, location and story text still need review. Changing an ID appears as removal/addition; neither input is modified.
 
@@ -36,7 +43,7 @@ The tool does not inspect game saves, synchronize accounts, infer story state, o
 
 Part of the [Logan Pendragon Forge open-source collection](https://www.loganpendragonforge.com/open-source/). Licensed under the [MIT License](LICENSE).
 
-## Version 1.1.0: reviewed improvements
+## Updates in 1.1.0
 
 Add editable printable return-to-game cards, last-played and screenshot references, and explicit share-safe exports with omission previews.
 
